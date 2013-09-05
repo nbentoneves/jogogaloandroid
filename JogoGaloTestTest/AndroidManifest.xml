@@ -4,11 +4,11 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk android:minSdkVersion="13" />
+    <uses-sdk android:minSdkVersion="18" />
 
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
-        android:targetPackage="com.android.jogogalo.test" />
+        android:targetPackage="com.android.jogogalo" />
 
     <application
         android:icon="@drawable/ic_launcher"
