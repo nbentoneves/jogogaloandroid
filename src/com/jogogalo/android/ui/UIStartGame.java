@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class Entrada extends FragmentActivity implements EditNameDialog {
+public class UIStartGame extends FragmentActivity implements EditNameDialog {
 
 	private Intent intent;
 
@@ -22,7 +22,7 @@ public class Entrada extends FragmentActivity implements EditNameDialog {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_entrada);
 
-		intent = new Intent(this, JogoGalo.class);
+		intent = new Intent(this, UIGame.class);
 
 		Button player = (Button) findViewById(R.id.button1v1);
 		Button computer = (Button) findViewById(R.id.button1vc);
@@ -66,7 +66,7 @@ public class Entrada extends FragmentActivity implements EditNameDialog {
 			@Override
 			public void run() {
 				Intent intent = new Intent(getApplicationContext(),
-						JogoGalo.class);
+						UIGame.class);
 				startActivity(intent);
 			}
 		}, 2000);
