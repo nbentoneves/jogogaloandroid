@@ -7,4 +7,12 @@
     <string name="title_activity_entrada">Entrada</string>
     <string name="title_activity_jogo_galo">JogoGalo</string>
 
+    <string name="player">1 vs 1</string>
+    <string name="computer">1 vs Computer</string>
+    <string name="exit">Exit</string>
+    
+    <string name="title_dialog_name">Name Player:</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    
 </resources>

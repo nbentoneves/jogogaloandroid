@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.android.ui.Entrada"
+            android:name="com.jogogalo.android.ui.UIStartGame"
             android:label="@string/title_activity_entrada" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.android.ui.JogoGalo"
+            android:name="com.jogogalo.android.ui.UIGame"
             android:label="@string/title_activity_jogo_galo" >
         </activity>
     </application>
