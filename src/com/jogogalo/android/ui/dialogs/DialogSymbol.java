@@ -4,19 +4,17 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
+import android.widget.ListView;
 
 import com.android.jogogalo.R;
 import com.jogogalo.android.ui.UIStartGame;
 
-public class DialogName implements OnClickListener {
+public class DialogSymbol implements OnClickListener {
 
+    String items[];
     private Context mContext;
-    private EditText mEditText;
 
-    public DialogName(Context mContext) {
+    public DialogSymbol(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -24,21 +22,18 @@ public class DialogName implements OnClickListener {
 
         AlertDialog.Builder builder_dialog = new AlertDialog.Builder(mContext);
 
-        LayoutInflater inflater = LayoutInflater.from(mContext);
-
-        View view = inflater.inflate(R.layout.dialog_name, null);
-
-        mEditText = (EditText) view.findViewById(R.id.name);
+        items = mContext.getResources().getStringArray(R.array.symbol_array);
 
         // Create layout to dialog
-        builder_dialog.setView(view);
-        builder_dialog.setTitle(R.string.title_dialog_name);
+        builder_dialog.setTitle(R.string.title_dialog_select_symbol);
+        builder_dialog.setSingleChoiceItems(items, -1, null);
         // Remove button back
         builder_dialog.setCancelable(false);
         builder_dialog.setPositiveButton(R.string.ok, this);
         builder_dialog.setNegativeButton(R.string.cancel, this);
 
         return builder_dialog.create();
+
     }
 
     @Override
@@ -46,10 +41,11 @@ public class DialogName implements OnClickListener {
 
         switch (button_id) {
             case DialogInterface.BUTTON_POSITIVE:
-                ((UIStartGame) mContext).onFinishDialogName(mEditText.getText().toString());
+                ListView list = ((AlertDialog) dialog).getListView();
+                Object checkedItem = list.getAdapter().getItem(list.getCheckedItemPosition());
+                ((UIStartGame) mContext).onFinishDialogSymbol((String) checkedItem);
                 break;
-
-            case DialogInterface.BUTTON_NEUTRAL:
+            case DialogInterface.BUTTON_NEGATIVE:
                 dialog.dismiss();
                 break;
 

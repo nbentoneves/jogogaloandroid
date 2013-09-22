@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="symbol_array">
+        <item>X</item>
+        <item>O</item>
+    </string-array>
+</resources>

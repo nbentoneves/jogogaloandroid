@@ -10,9 +10,11 @@
     <string name="player">1 vs 1</string>
     <string name="computer">1 vs Computer</string>
     <string name="exit">Exit</string>
-    
+
     <string name="title_dialog_name">Name Player:</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
-    
+
+    <string name="title_dialog_select_symbol">Select Symbol</string>
+
 </resources>

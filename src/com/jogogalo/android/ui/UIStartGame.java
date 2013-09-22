@@ -1,86 +1,86 @@
 package com.jogogalo.android.ui;
 
-import com.android.jogogalo.R;
-import com.jogogalo.android.ui.dialogs.DialogName;
-import com.jogogalo.android.ui.dialogs.EditNameDialog;
-
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class UIStartGame extends FragmentActivity implements EditNameDialog {
+import com.android.jogogalo.R;
+import com.jogogalo.android.ui.dialogs.DialogName;
+import com.jogogalo.android.ui.dialogs.DialogSymbol;
 
-	private Intent intent;
+public class UIStartGame extends Activity {
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_entrada);
+    private Intent intent;
 
-		intent = new Intent(this, UIGame.class);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_entrada);
 
-		Button player = (Button) findViewById(R.id.button1v1);
-		Button computer = (Button) findViewById(R.id.button1vc);
+        intent = new Intent(this, UIGame.class);
 
-		OnClickListener playerListener = new OnClickListener() {
+        Button player = (Button) findViewById(R.id.button1v1);
+        Button computer = (Button) findViewById(R.id.button1vc);
 
-			@Override
-			public void onClick(View v) {
-				intent.putExtra("mode", "player");
-			}
-		};
+        OnClickListener playerListener = new OnClickListener() {
 
-		OnClickListener computerListener = new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent.putExtra("mode", "player");
+            }
+        };
 
-			@Override
-			public void onClick(View v) {
-				DialogName fragment_dialog = DialogName.getInstance();
-				fragment_dialog.show(getSupportFragmentManager(),
-						"fragment_dialog_name");
-				intent.putExtra("mode", "computer");
-			}
-		};
+        OnClickListener computerListener = new OnClickListener() {
 
-		player.setOnClickListener(playerListener);
+            @Override
+            public void onClick(View v) {
+                DialogName dialog = new DialogName(UIStartGame.this);
+                dialog.create().show();
+            }
+        };
 
-		computer.setOnClickListener(computerListener);
+        player.setOnClickListener(playerListener);
 
-	}
+        computer.setOnClickListener(computerListener);
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.entrada, menu);
-		return true;
-	}
+    }
 
-	public void startActivityUsingTime() {
-		Handler handler = new Handler();
-		handler.postDelayed(new Runnable() {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.entrada, menu);
+        return true;
+    }
 
-			@Override
-			public void run() {
-				Intent intent = new Intent(getApplicationContext(),
-						UIGame.class);
-				startActivity(intent);
-			}
-		}, 2000);
-	}
+    public void startActivityUsingTime() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
 
-	/**
-	 * Help -
-	 * http://www.yousaytoo.com/dialogfragment-with-interface-to-pass-data
-	 * -back-to-activity/3059669
-	 */
-	@Override
-	public void onFinishDialog(String name) {
-		intent.putExtra("name_player", name);
-		startActivity(intent);
-	}
+            @Override
+            public void run() {
+                Intent intent = new Intent(getApplicationContext(),
+                        UIGame.class);
+                startActivity(intent);
+            }
+        }, 2000);
+    }
+
+
+    public void onFinishDialogName(String name) {
+        DialogSymbol symbol = new DialogSymbol(UIStartGame.this);
+        symbol.create().show();
+        intent.putExtra("mode", "computer");
+        intent.putExtra("name_player", name);
+    }
+
+    public void onFinishDialogSymbol(String symbol) {
+        intent.putExtra("symbol", symbol);
+        startActivity(intent);
+    }
 
 }
